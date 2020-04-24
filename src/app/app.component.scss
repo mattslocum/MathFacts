@@ -1,0 +1,59 @@
+$box-background: #666;
+
+:host {
+  align-items: center;
+  display: flex;
+  font-size: 1.8rem;
+  justify-content: center;
+  height: 100%;
+}
+
+.grid {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 40px 40px 100px 40px;
+  width: 80%;
+}
+
+.row {
+  display: flex;
+  flex: 1;
+
+  &:hover {
+    .box-number {
+      background-color: lighten($box-background, 10);
+    }
+  }
+
+  .box-number {
+    background: $box-background;
+    border: 2px solid #bbb;
+    cursor: pointer;
+
+    &.hover2 {
+      background-color: darken($box-background, 10);
+    }
+    &.hover {
+      background-color: lighten($box-background, 10);
+    }
+  }
+}
+
+.box {
+  flex: 1;
+  height: 100%;
+  line-height: 36px;
+  text-align: center;
+}
+
+.row-header {
+  display: table;
+  height: 100%;
+  width: 100%;
+  .text {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}

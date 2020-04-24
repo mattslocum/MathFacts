@@ -1,0 +1,23 @@
+:host {
+  height: 100%;
+  width: 100%;
+  display: block;
+}
+
+div {
+  height: 100%;
+}
+span {
+  display: none;
+  user-select: none;
+}
+.visible {
+  background-color: green;
+  display: table;
+  width: 100%;
+
+  span {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
