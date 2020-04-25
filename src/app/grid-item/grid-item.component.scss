@@ -5,6 +5,8 @@
 }
 
 div {
+  border: 1px solid #bbb;
+  box-sizing: border-box;
   height: 100%;
 }
 span {
@@ -12,12 +14,14 @@ span {
   user-select: none;
 }
 .visible {
+  align-items: center;
   background-color: green;
-  display: table;
+  display: flex;
+  justify-content: center;
   width: 100%;
 
   span {
-    display: table-cell;
+    display: inline;
     vertical-align: middle;
   }
 }

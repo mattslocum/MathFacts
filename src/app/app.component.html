@@ -1,13 +1,16 @@
+<app-controls class="controls"></app-controls>
+
 <div class="grid">
-  <div class="row">
+  <div class="row" [class.hovering]="hoverColumn">
     <div class="box"></div>
-    <div *ngFor="let user of gridSize; let x = index;" class="header box"><span class="text">{{x + 1}}</span></div>
+    <div *ngFor="let user of gridSize; let x = index;" class="header box" [class.hover]="hoverColumn === x + 1"><span class="text">{{x + 1}}</span></div>
   </div>
   <div *ngFor="let user of gridSize; let y = index;" class="row">
-    <div class="box"><div class="row-header"><span class="text">{{y + 1}}</span></div></div>
+    <div class="box" [class.hovering]="hoverColumn"><div class="row-header" [class.hover]="hoverRow === y + 1"><span class="text">{{y + 1}}</span></div></div>
     <div *ngFor="let user of gridSize; let x = index;" class="box box-number"
          [class.hover]="hoverColumn === x + 1"
-         [class.hover2]="(hoverRow === x + 1 && hoverColumn === y + 1)"
+         [class.opposite-box]="(hoverRow === x + 1 && hoverColumn === y + 1)"
+         [class.center]="x === y"
     >
       <app-grid-item [column]="x + 1" [row]="y + 1" (onHoverColumn)="hoverColumn = $event" (onHoverRow)="hoverRow = $event"></app-grid-item>
     </div>

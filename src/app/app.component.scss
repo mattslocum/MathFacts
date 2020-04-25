@@ -1,20 +1,33 @@
 $box-background: #666;
+$box-hover-background: lighten($box-background, 10);
+$box-opposite-background: darken($box-background, 10);
 
 :host {
-  align-items: center;
   display: flex;
   font-size: 1.8rem;
   justify-content: center;
   height: 100%;
 }
 
+.controls {
+  flex: 1;
+  border-right: 2px solid #666;
+}
 .grid {
   box-sizing: border-box;
   display: flex;
+  flex: 3;
   flex-direction: column;
   height: 100%;
-  padding: 40px 40px 100px 40px;
-  width: 80%;
+  padding: 40px 80px 60px 40px;
+  width: 70%;
+}
+
+.hovering {
+  color: #666;
+  .hover {
+    color: white;
+  }
 }
 
 .row {
@@ -23,20 +36,31 @@ $box-background: #666;
 
   &:hover {
     .box-number {
-      background-color: lighten($box-background, 10);
+      background-color: $box-hover-background;
+      &.center {
+        background-color: $box-hover-background;
+      }
     }
   }
 
   .box-number {
     background: $box-background;
-    border: 2px solid #bbb;
     cursor: pointer;
 
-    &.hover2 {
-      background-color: darken($box-background, 10);
+    &.center {
+      background-color: lighten($box-background, 6);
+    }
+
+    &.opposite-box {
+      background-color: $box-opposite-background;
     }
     &.hover {
-      background-color: lighten($box-background, 10);
+      background-color: $box-hover-background;
+
+      // actual center block
+      &:hover {
+        background-color: lighten($box-background, 8);
+      }
     }
   }
 }
@@ -44,7 +68,6 @@ $box-background: #666;
 .box {
   flex: 1;
   height: 100%;
-  line-height: 36px;
   text-align: center;
 }
 
