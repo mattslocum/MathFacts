@@ -1,3 +1,3 @@
-<div [class.visible]="isVisible" (mouseover)="onMouseOver()" (mouseout)="onMouseOut()">
-  <span class="answer">{{row * column}}</span>
+<div [class.visible]="value$ | async" (mouseover)="onMouseOver()" (mouseout)="onMouseOut()" [ngClass]="type$ | async">
+  <span class="answer">{{ value$ | async }}</span>
 </div>

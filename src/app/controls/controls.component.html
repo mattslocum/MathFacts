@@ -1,6 +1,9 @@
 <h1>Math Facts</h1>
 
-<select class="form-control grid-type" [(ngModel)]="gridType">
-  <option *ngFor="let type of types" [value]="type">{{type}}</option>
+<select class="form-control grid-type" [ngModel]="gridType$ | async" (change)="setType($event.target.value)">
+  <option *ngFor="let type of types" [value]="type.key">{{type.value}}</option>
 </select>
 
+<div *ngIf="choices$ | async">
+  <button *ngFor="let choice of choices$ | async">{{choice}}</button>
+</div>
