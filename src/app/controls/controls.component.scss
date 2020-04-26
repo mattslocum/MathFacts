@@ -7,3 +7,19 @@ h1 {
   font-weight: normal;
   margin-bottom: 1.5rem;
 }
+
+.multi-choice, .explore {
+  margin: 40px 0;
+}
+
+.multi-choice {
+  .options {
+    display: flex;
+    justify-content: space-around;
+
+    button {
+      font-size: 20px;
+      padding: 0 12px;
+    }
+  }
+}
