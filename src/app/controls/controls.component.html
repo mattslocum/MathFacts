@@ -5,11 +5,11 @@
 </select>
 
 <div *ngIf="(gridMode$ | async) === 'explore' && (selected$ | async) as selected" class="explore">
-  <h3>{{selected.col}} x {{selected.row}} = {{selected.col * selected.row}}</h3>
+  <h3>{{selected.row}} x {{selected.col}} = {{selected.col * selected.row}}</h3>
 </div>
 
 <div *ngIf="(gridMode$ | async) === 'multiple-choice' && (selected$ | async)" class="multi-choice">
-  <h3>{{(selected$ | async).col}} x {{(selected$ | async).row}} = </h3>
+  <h3>{{(selected$ | async).row}} x {{(selected$ | async).col}} = </h3>
   <div class="options">
     <button *ngFor="let choice of choices$ | async" class="form-control" (click)="pickMulti(choice)">{{choice}}</button>
   </div>

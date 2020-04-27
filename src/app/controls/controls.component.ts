@@ -86,17 +86,24 @@ export class ControlsComponent implements OnInit {
   }
 
   public pickMulti(choice) {
-    const cell = this.state.getSelected();
-    cell.answered = true;
-    cell.correct = cell.col * cell.row === choice;
+    const selectedCell = this.state.getSelected();
+    selectedCell.answered = true;
+    selectedCell.correct = selectedCell.col * selectedCell.row === choice;
 
     const cellIterator = this.state.getCells().entries();
-    let cellLoop = cellIterator.next();
-    while (!cellLoop.done && cell.id !== cellLoop.value[0]) {
-      cellLoop = cellIterator.next();
-    }
-    cellLoop = cellIterator.next();
+    const sameRow : IGridCell[] = [];
 
-    this.state.setSelected(cellLoop.value[0]);
+    for (let cellLoop : IteratorResult<[Symbol, IGridCell]> = cellIterator.next();
+         !cellLoop.done;
+         cellLoop = cellIterator.next()
+    ) {
+      if (selectedCell.row === cellLoop.value[1].row && !cellLoop.value[1].answered) {
+        sameRow.push(cellLoop.value[1]);
+      }
+    }
+
+    let cell = sameRow[Math.floor(Math.random() * sameRow.length)];
+
+    this.state.setSelected(cell?.id);
   }
 }
