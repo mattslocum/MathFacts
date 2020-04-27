@@ -61,8 +61,11 @@ export class ControlsComponent implements OnInit {
 
     const options = [
       cell.row * cell.col,
-      cell.row + cell.col,
     ];
+    if (cell.row !== 2 && cell.col !== 2) {
+      options.push(cell.row + cell.col);
+    }
+
     const baseOptions = [cell.row, cell.col, 1];
 
     while (options.length < NUM_OPTIONS) {
@@ -86,6 +89,14 @@ export class ControlsComponent implements OnInit {
     const cell = this.state.getSelected();
     cell.answered = true;
     cell.correct = cell.col * cell.row === choice;
-    this.state.setSelected(null);
+
+    const cellIterator = this.state.getCells().entries();
+    let cellLoop = cellIterator.next();
+    while (!cellLoop.done && cell.id !== cellLoop.value[0]) {
+      cellLoop = cellIterator.next();
+    }
+    cellLoop = cellIterator.next();
+
+    this.state.setSelected(cellLoop.value[0]);
   }
 }

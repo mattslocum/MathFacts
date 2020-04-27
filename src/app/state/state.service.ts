@@ -52,4 +52,8 @@ export class StateService {
   getSelected() : IGridCell {
     return this._state.selected;
   }
+
+  getCells() : Map<Symbol, IGridCell> {
+    return this._state.gridCells;
+  }
 }
