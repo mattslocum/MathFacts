@@ -12,8 +12,8 @@ export class ControlsComponent implements OnInit {
 
   // TODO: const/enum these for strong typing
   public modes = [
-    { key: "explore", value: "Explore" },
     { key: "multiple-choice", value: "Multiple Choice" },
+    { key: "explore", value: "Explore" },
     // { key: "quiz", value: "Quiz" }
   ];
 
