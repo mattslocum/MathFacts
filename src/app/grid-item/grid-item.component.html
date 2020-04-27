@@ -1,5 +1,6 @@
 <div
   [class.answered]="cell.answered || (isSelected$ | async)"
+  [class.selected]="isSelected$ | async"
   [class.wrong]="cell.answered && !cell.correct"
   (mouseover)="onMouseOver()"
   (mouseout)="onMouseOut()"
