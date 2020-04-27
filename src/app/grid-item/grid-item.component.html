@@ -5,7 +5,6 @@
   (mouseout)="onMouseOut()"
   [ngClass]="mode$ | async"
 >
-  <span class="answer" *ngIf="cell.answered && cell.correct">{{ this.column * this.row }}</span>
+  <span class="answer" *ngIf="cell.answered">{{ this.column * this.row }}</span>
   <span class="answer" *ngIf="!cell.answered && (isSelected$ | async)">?</span>
-  <span class="answer" *ngIf="cell.answered && !cell.correct">X</span>
 </div>
