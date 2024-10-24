@@ -1,5 +1,5 @@
-import {Component, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
-import {IGridCell, StateService} from "../state/state.service";
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { IGridCell, StateService } from "../state/state.service";
 import {
   distinctUntilKeyChanged,
   map,
@@ -23,7 +23,7 @@ export class GridItemComponent implements OnInit {
   @Output() onHoverRow = new EventEmitter<number>();
 
   private id = Symbol();
-  public cell : IGridCell = this.initCell();
+  public cell: IGridCell = this.initCell();
 
   public isSelected$ = this.state.state$.pipe(
     distinctUntilKeyChanged('selected'),
@@ -34,14 +34,21 @@ export class GridItemComponent implements OnInit {
   public mode$ = this.state.state$.pipe(
     distinctUntilKeyChanged('mode'),
     pluck('mode'),
+    // reset answered on mode change
     tap(() => this.cell.answered = false)
   );
 
-  constructor(private state: StateService) { }
+  constructor(public state: StateService) { }
 
   ngOnInit(): void {
     this.cell = this.initCell();
     this.state.saveCell(this.cell);
+
+    // reset answered on operator change
+    this.state.state$.pipe(
+      distinctUntilKeyChanged('operator'),
+      pluck('operator')
+    ).subscribe(() => this.cell.answered = false);
   }
 
   @HostListener("click") onClick() {
@@ -54,7 +61,7 @@ export class GridItemComponent implements OnInit {
     }
   }
 
-  private initCell() : IGridCell {
+  private initCell(): IGridCell {
     return {
       id: this.id,
       col: this.column,

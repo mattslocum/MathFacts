@@ -1,11 +1,6 @@
-<div
-  [class.answered]="cell.answered || (isSelected$ | async)"
-  [class.selected]="isSelected$ | async"
-  [class.wrong]="cell.answered && !cell.correct"
-  (mouseover)="onMouseOver()"
-  (mouseout)="onMouseOut()"
-  [ngClass]="mode$ | async"
->
-  <span class="answer" *ngIf="cell.answered">{{ this.column * this.row }}</span>
+<div [class.answered]="cell.answered || (isSelected$ | async)" [class.selected]="isSelected$ | async"
+  [class.wrong]="cell.answered && !cell.correct" (mouseover)="onMouseOver()" (mouseout)="onMouseOut()"
+  [ngClass]="mode$ | async">
+  <span class="answer" *ngIf="cell.answered">{{ this.state.runOpperation(this.column, this.row) }}</span>
   <span class="answer" *ngIf="!cell.answered && (isSelected$ | async)">?</span>
 </div>

@@ -1,15 +1,21 @@
 <h1>Math Facts</h1>
 
+<select class="form-control grid-mode" [ngModel]="gridOperator$ | async" (change)="setOperator($event.target.value)">
+  <option *ngFor="let op of operation" [value]="op.key">{{op.value}}</option>
+</select>
+
+<br />
 <select class="form-control grid-mode" [ngModel]="gridMode$ | async" (change)="setMode($event.target.value)">
   <option *ngFor="let mode of modes" [value]="mode.key">{{mode.value}}</option>
 </select>
 
 <div *ngIf="(gridMode$ | async) === 'explore' && (selected$ | async) as selected" class="explore">
-  <h3>{{selected.row}} x {{selected.col}} = {{selected.col * selected.row}}</h3>
+  <h3>{{selected.row}} {{ gridOperator$ | async }} {{selected.col}} =
+    {{ this.state.runOpperation(selected.col, selected.row) }}</h3>
 </div>
 
 <div *ngIf="(gridMode$ | async) === 'multiple-choice' && (selected$ | async)" class="multi-choice">
-  <h3>{{(selected$ | async).row}} x {{(selected$ | async).col}} = </h3>
+  <h3>{{(selected$ | async).row}} {{ gridOperator$ | async }} {{(selected$ | async).col}} = </h3>
   <div class="options">
     <button *ngFor="let choice of choices$ | async" class="form-control" (click)="pickMulti(choice)">{{choice}}</button>
   </div>
