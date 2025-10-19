@@ -25,7 +25,7 @@ export class StateService {
   private _state: IGridState = {
     gridCells: new Map(),
     mode: '',
-    operator: '+',
+    operator: 'x',
   };
   // TODO: Consider switching to ngrx
   private _stateSubject = new BehaviorSubject<IGridState>(this._state);

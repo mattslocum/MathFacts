@@ -72,7 +72,7 @@ export class ControlsComponent implements OnInit {
     }
 
     const NUM_OPTIONS = 4;
-    const MAX_VALUE = 10 * 10; // TODO: Use shared
+    const MAX_VALUE = 12 * 12; // TODO: Use shared
     const answer = this.state.runOpperation(cell.row, cell.col);
 
     const options = [
