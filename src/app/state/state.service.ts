@@ -14,6 +14,7 @@ export interface IGridState {
   mode: string; // TODO Enum
   operator: string; // TODO Enum
   selected?: IGridCell;
+  showAll: boolean;
 }
 
 @Injectable({
@@ -26,6 +27,7 @@ export class StateService {
     gridCells: new Map(),
     mode: '',
     operator: 'x',
+    showAll: false,
   };
   // TODO: Consider switching to ngrx
   private _stateSubject = new BehaviorSubject<IGridState>(this._state);
@@ -34,12 +36,12 @@ export class StateService {
   constructor() { }
 
   setMode(mode: string) {
-    this._state = { ...this._state, mode, selected: null };
+    this._state = { ...this._state, mode, selected: null, showAll: false };
     this._stateSubject.next(this._state);
   }
 
   setOperator(operator: string) {
-    this._state = { ...this._state, operator: operator, selected: null };
+    this._state = { ...this._state, operator: operator, selected: null, showAll: false };
     this._stateSubject.next(this._state);
   }
 
@@ -66,6 +68,29 @@ export class StateService {
 
   getCells(): Map<Symbol, IGridCell> {
     return this._state.gridCells;
+  }
+
+  setShowAll(showAll: boolean) {
+    this._state = { ...this._state, showAll, selected: null };
+    
+    // Set all cells as answered or reset them based on showAll
+    if (showAll) {
+      this._state.gridCells.forEach(cell => {
+        cell.answered = true;
+        cell.correct = true;
+      });
+    } else {
+      this._state.gridCells.forEach(cell => {
+        cell.answered = false;
+        cell.correct = undefined;
+      });
+    }
+    
+    this._stateSubject.next(this._state);
+  }
+
+  getShowAll(): boolean {
+    return this._state.showAll;
   }
 
   runOpperation(a, b): number {

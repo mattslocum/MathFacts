@@ -34,6 +34,11 @@ export class ControlsComponent implements OnInit {
     tap(data => console.log(data))
   );
 
+  public showAll$ = this.state.state$.pipe(
+    distinctUntilKeyChanged('showAll'),
+    pluck('showAll')
+  );
+
   public selected$: Observable<IGridCell> = this.state.state$.pipe(
     distinctUntilKeyChanged('selected'),
     pluck('selected'),
@@ -61,6 +66,10 @@ export class ControlsComponent implements OnInit {
 
   setMode(type): void {
     this.state.setMode(type);
+  }
+
+  toggleShowAll(): void {
+    this.state.setShowAll(!this.state.getShowAll());
   }
 
   private buildChoices(cell: IGridCell) {

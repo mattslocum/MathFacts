@@ -9,9 +9,17 @@
   <option *ngFor="let mode of modes" [value]="mode.key">{{mode.value}}</option>
 </select>
 
-<div *ngIf="(gridMode$ | async) === 'explore' && (selected$ | async) as selected" class="explore">
-  <h3>{{selected.row}} {{ gridOperator$ | async }} {{selected.col}} =
-    {{ this.state.runOpperation(selected.col, selected.row) }}</h3>
+<div *ngIf="(gridMode$ | async) === 'explore'" class="explore">
+  <button class="form-control show-all-btn" (click)="toggleShowAll()">
+    {{ (showAll$ | async) ? 'Hide All' : 'Show All' }}
+  </button>
+  
+  <div *ngIf="(selected$ | async) as selected">
+    <div *ngIf="!(showAll$ | async)">
+      <h3>{{selected.row}} {{ gridOperator$ | async }} {{selected.col}} =
+        {{ this.state.runOpperation(selected.col, selected.row) }}</h3>
+    </div>
+  </div>
 </div>
 
 <div *ngIf="(gridMode$ | async) === 'multiple-choice' && (selected$ | async)" class="multi-choice">
